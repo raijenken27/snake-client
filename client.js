@@ -1,9 +1,26 @@
 // client.js
 const net = require("net");
 
-// Function to connect to the server
-const connect = function () {
-  // ... (existing connect function code)
+const connect = () => {
+  const conn = net.createConnection({
+    host: "localhost",
+    port: 50541, 
+  });
+
+  conn.on("connect", () => {
+    console.log("Successfully connected to game server");
+    conn.write("Name: Jerome"); 
+  });
+
+  conn.setEncoding("utf8");
+
+  conn.on("data", (data) => {
+    console.log(data);
+  });
+
+  return conn;
 };
 
-module.exports = { connect }; // Export the connect function
+module.exports = {
+  connect,
+};
