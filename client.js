@@ -1,4 +1,5 @@
 // client.js
+
 const net = require("net");
 
 const connect = () => {
@@ -9,7 +10,7 @@ const connect = () => {
 
   conn.on("connect", () => {
     console.log("Successfully connected to game server");
-    conn.write("Name: Jerome"); 
+    conn.write("Name: Jerome");
   });
 
   conn.setEncoding("utf8");
