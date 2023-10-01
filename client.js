@@ -1,6 +1,10 @@
 // client.js
 
 const net = require("net");
+const { IP, PORT } = require("./constants");
+//Added 
+
+const net = require("net");
 
 const connect = () => {
   const conn = net.createConnection({
