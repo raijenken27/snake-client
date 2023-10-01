@@ -19,6 +19,12 @@ const setupInput = (conn) => {
       connection.write("Move: down");
     } else if (key === "d") {
       connection.write("Move: right");
+    } else if (key === '1') {
+      connection.write("Say: Hello, this is a Snake!");
+    } else if (key === '2') {
+      connection.write("Say: Watch out!");
+    } else if (key === '3') {
+      connection.write("Say: I'm the longest!");
     } else if (key === '\u0003') {
       process.exit(); // Ctrl + C exits the game
     }
