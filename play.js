@@ -3,4 +3,4 @@ const setupInput = require("./input");
 
 const conn = connect();
 
-setupInput();
+setupInput(conn);
