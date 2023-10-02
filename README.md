@@ -7,9 +7,7 @@ This is simply a multiplayer take on the genre.
 Before you can run this client, you will need to be running the server side which you can download and install from here. 
 
 ## Final Product
-
-!["SnakeScreenshot.png"](#)
-
+<img width="896" alt="SnakeScreenshot" src="https://github.com/raijenken27/snake-client/assets/29512917/93d8a380-ed3b-49e1-ae4c-98ebff9fc32a">
 
 ## Getting Started
 
