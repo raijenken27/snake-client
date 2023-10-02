@@ -1,39 +1,62 @@
-const { MOVE_UP_KEY, MOVE_LEFT_KEY, MOVE_DOWN_KEY, MOVE_RIGHT_KEY, MESSAGES } = require('./constants');
+const { UPKEY, LEFTKEY, DOWNKEY, RIGHTKEY } = require('./constants.js');
 
 let connection;
 
-const handleUserInput = function(key) {
-  if (key === '\u0003') {
-    process.exit();
-  }
-    
-  if (key === MOVE_UP_KEY) {
-    connection.write('Move: up');
-  }
-  if (key === MOVE_LEFT_KEY) {
-    connection.write('Move: left');
-  }
-  if (key === MOVE_DOWN_KEY) {
-    connection.write('Move: down');
-  }
-  if (key === MOVE_RIGHT_KEY) {
-    connection.write('Move: right');
-  }
-  if (MESSAGES[key]) {
-    connection.write(MESSAGES[key]);
-  }
-
-};
+const msg = "Say: ";
+const hello = "Hello there!";
+const stay = "Stay a while...";
+const listen = "...and listen!";
 
 const setupInput = function(conn) {
   connection = conn;
   const stdin = process.stdin;
   stdin.setRawMode(true);
   stdin.setEncoding('utf8');
-  stdin.on('data', handleUserInput);
   stdin.resume();
+  stdin.on('data', key => {
+    handleUserInput(key);
+  });
   return stdin;
 };
 
-//EXPORT
+let func;
+
+const handleUserInput = (key) => {
+  const stdout = process.stdout;
+  const interval = function(key) {
+    func = setInterval(() => {
+      connection.write(key);
+    }, 100);
+  };
+  if (key === '\u0003') {
+    stdout.write("Exited snek game. Bye bye.\n");
+    process.exit();
+  }
+  if (key === 'w') {
+    clearInterval(func);
+    interval(UPKEY);
+  }
+  if (key === 'a') {
+    clearInterval(func);
+    interval(LEFTKEY);
+  }
+  if (key === 's') {
+    clearInterval(func);
+    interval(DOWNKEY);
+  }
+  if (key === 'd') {
+    clearInterval(func);
+    interval(RIGHTKEY);
+  }
+  if (key === "h") {
+    connection.write(msg + hello);
+  }
+  if (key === "j") {
+    connection.write(msg + stay);
+  }
+  if (key === 'k') {
+    connection.write(msg + listen);
+  }
+};
+
 module.exports = { setupInput };
